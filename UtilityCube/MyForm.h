@@ -1294,7 +1294,7 @@ private: System::Void Mode6_CheckedChanged(System::Object^  sender, System::Even
 }
 
 private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  e) {
-	if (mode == 1) {
+	if (mode == 1) { 
 		// Molar Mass 
 		String^ input1 = Input1->Text;
 		Console::WriteLine(input1);
