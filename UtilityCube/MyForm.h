@@ -1305,50 +1305,55 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 	}
 	if (mode == 2) {
 		// Stoichimoetry Solver
-		String^ input1 = Input1->Text;
-		std::string moleculeString = msclr::interop::marshal_as< std::string >(input1);
-		String^ input2 = Input2->Text;
-		std::string qnty = msclr::interop::marshal_as< std::string >(input2);
-		String^ input3 = Input3->Text;
-		std::string unit = msclr::interop::marshal_as< std::string >(input3);
-		String^ input4 = Input4->Text;
-		std::string productString = msclr::interop::marshal_as< std::string >(input4);
 
-		double massLimiting = getElements(moleculeString);
-		//Console::Writeline("massLimiting = " + Convert::ToString(massLimiting));
-		double massProduct = getElements(productString);
-		//Console::Writeline("massProduct = " + Convert::ToString(massProduct));
-		double coefficientLimiting = getCoefficients(moleculeString);
-		//Console::Writeline("coefficientLimiting = " + Convert::ToString(coefficientLimiting));
-		double coefficientProduct = getCoefficients(productString);
-		//Console::Writeline("coefficientProduct = " + Convert::ToString(coefficientProduct));
-		double yMols;
-		double yMass;
+		if ((Input1->Text->Length != 0) && (Input2->Text->Length != 0) && (Input3->Text->Length != 0) && (Input4->Text->Length != 0)) {
+			String^ input1 = Input1->Text;
+			std::string moleculeString = msclr::interop::marshal_as< std::string >(input1);
+			String^ input2 = Input2->Text;
+			std::string qnty = msclr::interop::marshal_as< std::string >(input2);
+			String^ input3 = Input3->Text;
+			std::string unit = msclr::interop::marshal_as< std::string >(input3);
+			String^ input4 = Input4->Text;
+			std::string productString = msclr::interop::marshal_as< std::string >(input4);
 
-		if ((unit == "mols") | (unit == "mol") | (unit == "moles") | (unit == "mole") | (unit == "Mols") | (unit == "Mol") | (unit == "Moles") | (unit == "Mole")) {
+			double massLimiting = getElements(moleculeString);
+			//Console::Writeline("massLimiting = " + Convert::ToString(massLimiting));
+			double massProduct = getElements(productString);
+			//Console::Writeline("massProduct = " + Convert::ToString(massProduct));
+			double coefficientLimiting = getCoefficients(moleculeString);
+			//Console::Writeline("coefficientLimiting = " + Convert::ToString(coefficientLimiting));
+			double coefficientProduct = getCoefficients(productString);
+			//Console::Writeline("coefficientProduct = " + Convert::ToString(coefficientProduct));
+			double yMols;
+			double yMass;
 
-			yMols = (atof(qnty.c_str()) * (coefficientProduct/coefficientLimiting));
-			yMass = (yMols / massProduct);
+			if ((unit == "mols") | (unit == "mol") | (unit == "moles") | (unit == "mole") | (unit == "Mols") | (unit == "Mol") | (unit == "Moles") | (unit == "Mole")) {
 
-			//Console::Writeline("yieldMols = " + Convert::ToString(yMols) + " | yieldMass = " + Convert::ToString(yMass));
+				yMols = (atof(qnty.c_str()) * (coefficientProduct / coefficientLimiting));
+				yMass = (yMols / massProduct);
+
+				//Console::Writeline("yieldMols = " + Convert::ToString(yMols) + " | yieldMass = " + Convert::ToString(yMass));
+			}
+			if ((unit == "grams") | (unit == "gram") | (unit == "g") | (unit == "Grams") | (unit == "Gram") | (unit == "G")) {
+
+				yMols = ((atof(qnty.c_str()) / massLimiting) * (coefficientProduct / coefficientLimiting));
+				yMass = (yMols / massProduct);
+
+				//Console::Writeline("yieldMols = " + Convert::ToString(yMols) + " | yieldMass = " + Convert::ToString(yMass));
+			}
+
+			Output->Text = "The yield of " + Input4->Text + " is:\r\n" + Convert::ToString(yMols) + " mols\r\n" + Convert::ToString(yMass) + " grams\r\nWith " + Convert::ToString(Input2->Text) + " " + Convert::ToString(Input3->Text) + " of " + Convert::ToString(Input1->Text);
 		}
-		if ((unit == "grams") | (unit == "gram") | (unit == "g") | (unit == "Grams") | (unit == "Gram") | (unit == "G")) {
-
-			yMols = ((atof(qnty.c_str()) / massLimiting) * (coefficientProduct / coefficientLimiting));
-			yMass = (yMols / massProduct);
-
-			//Console::Writeline("yieldMols = " + Convert::ToString(yMols) + " | yieldMass = " + Convert::ToString(yMass));
-		}
-		
-		Output->Text = "The yield of " + Input4->Text + " is:\r\n" + Convert::ToString(yMols) + " mols\r\n" + Convert::ToString(yMass) + " grams\r\nWith " + Convert::ToString(Input2->Text) + " " + Convert::ToString(Input3->Text) + " of " + Convert::ToString(Input1->Text);
-
 	}
 	if (mode == 3) {
 		//Permutations and Combinations
-		bool cp;
-		unsigned long long int n = int::Parse(Input1->Text) % 26;
-		unsigned long long int r;
-		unsigned long long int k;
+		bool cp = 0;
+		unsigned long long int n = 1;
+		if (!(Input1->Text->Length == 0)) {
+			unsigned long long int n = int::Parse(Input1->Text) % 26;
+		}
+		unsigned long long int r = 1;
+		unsigned long long int k = 1;
 		if (Input2->Text->Length == 0) {
 			r = n;
 			k = n;
@@ -1404,9 +1409,18 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 		}
 	}
 	if (mode == 5) {
-		long double a = Double::Parse(Input1->Text);
-		long double b = Double::Parse(Input2->Text);
-		long double c = Double::Parse(Input3->Text) - Double::Parse(Input4->Text);
+		long double a; 
+		if (!(Input1->Text->Length == 0)) {
+			a = Double::Parse(Input1->Text);
+		}
+		long double b;
+		if (!(Input2->Text->Length == 0)) {
+			b = Double::Parse(Input2->Text);
+		}
+		long double c;
+		if (!(Input3->Text->Length == 0) && !(Input4->Text->Length == 0)) {
+			c = Double::Parse(Input3->Text) - Double::Parse(Input4->Text);
+		}
 		double root1;
 		double root2;
 
@@ -1435,19 +1449,29 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 
 	}
 	if (mode == 6) {
-		msclr::interop::marshal_context context;
 
-		input1 = Input1->Text;
-		std::string name1 = context.marshal_as<std::string>(input1);
+		std::string name1 = "Player-1";
+		std::string name3 = "Bot";
+		std::string name2 = "X";
+		std::string name4 = "O";
 
-		input2 = Input2->Text;
-		std::string name2 = context.marshal_as<std::string>(input2);
+		if ((Input1->Text->Length != 0) && (Input2->Text->Length != 0) && (Input3->Text->Length != 0) && (Input4->Text->Length != 0)) {
 
-		input3 = Input3->Text;
-		std::string name3 = context.marshal_as<std::string>(input3);
+			msclr::interop::marshal_context context;
 
-		input4 = Input4->Text;
-		std::string name4 = context.marshal_as<std::string>(input4);
+			input1 = Input1->Text;
+			std::string name1 = context.marshal_as<std::string>(input1);
+
+			input2 = Input2->Text;
+			std::string name2 = context.marshal_as<std::string>(input2);
+
+			input3 = Input3->Text;
+			std::string name3 = context.marshal_as<std::string>(input3);
+
+			input4 = Input4->Text;
+			std::string name4 = context.marshal_as<std::string>(input4);
+
+		}
 
 		std::ofstream playerData;
 		playerData.open(".\\UtilityCube\\pdata.txt");
