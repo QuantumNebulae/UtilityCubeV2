@@ -1294,6 +1294,7 @@ private: System::Void Mode6_CheckedChanged(System::Object^  sender, System::Even
 			 GuideBox->Text = "Insert the required information into the 4 input boxes on the left, and click submit. To play a bot, type in bot as player 2's name. To play a hardbot, type in hardbot as player 2's name.";
 }
 
+
 private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  e) {
 	if (mode == 1) { 
 		// Molar Mass
