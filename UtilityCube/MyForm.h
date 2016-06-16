@@ -559,7 +559,7 @@ namespace UtilityCube {
 
 			for (int o = 1; o <= elementCount; o++) {
 				
-				Console::WriteLine("iteration: " + Convert::ToString(o));
+				//Console::WriteLine("iteration: " + Convert::ToString(o));
 
 				//Gets polyatomic start and end braces
 				for (unsigned int k = prevElementPos; k < molecule.length(); k++) {
@@ -587,7 +587,7 @@ namespace UtilityCube {
 					}
 
 				}
-				Console::WriteLine("currElementPos = " + Convert::ToString(currElementPos));
+				//Console::WriteLine("currElementPos = " + Convert::ToString(currElementPos));
 
 				// Finds the next elements position in the string
 				for (unsigned int p = currElementPos + 1; p < molecule.length(); p++) {
@@ -669,7 +669,7 @@ namespace UtilityCube {
 
 								//Console::Writeline("1: Testing!!!");
 
-								Console::Write("\npolyatomicStart < currElementPos: ");
+								/*Console::Write("\npolyatomicStart < currElementPos: ");
 								if (polyatomicStart < currElementPos) { Console::Write("TRUE"); }
 								else { Console::Write("FALSE"); }
 								Console::Write("\ncurrElementPos < polyatomicEnd: ");
@@ -677,7 +677,7 @@ namespace UtilityCube {
 								else { Console::Write("FALSE"); }
 								Console::Write("\ni == nextElementPos - 1: ");
 								if (i == nextElementPos - 1) { Console::Write("TRUE\n\n"); }
-								else { Console::Write("FALSE\n\n"); }
+								else { Console::Write("FALSE\n\n"); }*/
 
 								if ((i < currElementPos) && (i < polyatomicEnd) && (i == nextElementPos - 1)) {
 									if (coefficients[o] == 0) {
