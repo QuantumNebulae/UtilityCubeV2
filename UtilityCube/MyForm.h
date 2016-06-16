@@ -535,7 +535,7 @@ namespace UtilityCube {
 			int currElementPos = 0;
 			char currLetter;
 			int prevElementPos = 0;
-			int nextElementPos;
+			int nextElementPos = 0;
 			int polyatomicStart = 0;
 			int polyatomicEnd = 0;
 			int polySub = 0;
@@ -558,6 +558,7 @@ namespace UtilityCube {
 			//Finds first element
 
 			for (int o = 1; o <= elementCount; o++) {
+				
 				Console::WriteLine("iteration: " + Convert::ToString(o));
 
 				//Gets polyatomic start and end braces
@@ -594,7 +595,7 @@ namespace UtilityCube {
 					currLetter = molecule.at(p);
 					if (((65 <= currLetter) && (currLetter <= 90)) | (currLetter == 41)) {
 						nextElementPos = p;
-						Console::WriteLine("nextElementPos = " + Convert::ToString(nextElementPos));
+						//Console::Writeline("nextElementPos = " + Convert::ToString(nextElementPos));
 						break;
 					}
 				}
@@ -609,7 +610,7 @@ namespace UtilityCube {
 						}
 					}
 				}
-				Console::WriteLine("polySub = " + Convert::ToString(polySub));
+				//Console::Writeline("polySub = " + Convert::ToString(polySub));
 				
 				//Gets elements symbol and their coefficients
 				if (o == 1) {
@@ -666,7 +667,7 @@ namespace UtilityCube {
 								int sub = int::Parse(Convert::ToString(Convert::ToInt32(coefficients[o])) + Convert::ToString(Convert::ToChar(currLetter)));
 								coefficients[o] = sub;
 
-								Console::WriteLine("1: Testing!!!");
+								//Console::Writeline("1: Testing!!!");
 
 								Console::Write("\npolyatomicStart < currElementPos: ");
 								if (polyatomicStart < currElementPos) { Console::Write("TRUE"); }
@@ -752,8 +753,8 @@ namespace UtilityCube {
 
 			//Debug code
 			for (int i = 1; i < elementCount + 1; i++) {
-				Console::WriteLine("elements[" + Convert::ToString(i) + "] = " + Convert::ToString(elements[i]));
-				Console::WriteLine("coefficients[" + Convert::ToString(i) + "] = " + Convert::ToString(coefficients[i]));
+				//Console::Writeline("elements[" + Convert::ToString(i) + "] = " + Convert::ToString(elements[i]));
+				//Console::Writeline("coefficients[" + Convert::ToString(i) + "] = " + Convert::ToString(coefficients[i]));
 			}
 
 			//Calculating Mass and Outputting
@@ -1141,7 +1142,7 @@ namespace UtilityCube {
 			if ((coefficient == 0) | (coefficient == NULL)) {
 				coefficient = 1;
 			}
-			Console::WriteLine("coefficient = " + Convert::ToString(coefficient));
+			//Console::Writeline("coefficient = " + Convert::ToString(coefficient));
 			return coefficient;
 		}
 
@@ -1167,8 +1168,8 @@ namespace UtilityCube {
 					factorsS.push_back(i);
 					factorsL.push_back(number / i);
 
-					Console::WriteLine("factorsS[" + Convert::ToString(f) + "] = " + Convert::ToString(factorsS[f]));
-					Console::WriteLine("factorsL[" + Convert::ToString(f) + "] = " + Convert::ToString(factorsL[f]));
+					//Console::Writeline("factorsS[" + Convert::ToString(f) + "] = " + Convert::ToString(factorsS[f]));
+					//Console::Writeline("factorsL[" + Convert::ToString(f) + "] = " + Convert::ToString(factorsL[f]));
 
 					f++;
 				}
@@ -1207,9 +1208,9 @@ namespace UtilityCube {
 			do {
 
 				for (int i = 2; i <= sqrt(number); i++) {
-					Console::WriteLine("i = " + Convert::ToString(i));
-					Console::WriteLine("isPrime(i) = " + Convert::ToString(isPrime(i)));
-					Console::WriteLine("number / i = " + Convert::ToString(number / i));
+					//Console::Writeline("i = " + Convert::ToString(i));
+					//Console::Writeline("isPrime(i) = " + Convert::ToString(isPrime(i)));
+					//Console::Writeline("number / i = " + Convert::ToString(number / i));
 					f = i;
 					if ((number % i == 0) && (isPrime(i))) {
 						factorsP.push_back(i);
@@ -1297,7 +1298,7 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 	if (mode == 1) { 
 		// Molar Mass
 		String^ input1 = Input1->Text;
-		Console::WriteLine(input1);
+		//Console::Writeline(input1);
 		std::string moleculeString = msclr::interop::marshal_as< std::string >(input1);
 		Output->Text = "The mass of your molecule " + Input1->Text + " is: \r\n" + Convert::ToString(getElements(moleculeString)) + " g/mol";
 	}
@@ -1313,13 +1314,13 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 		std::string productString = msclr::interop::marshal_as< std::string >(input4);
 
 		double massLimiting = getElements(moleculeString);
-		Console::WriteLine("massLimiting = " + Convert::ToString(massLimiting));
+		//Console::Writeline("massLimiting = " + Convert::ToString(massLimiting));
 		double massProduct = getElements(productString);
-		Console::WriteLine("massProduct = " + Convert::ToString(massProduct));
+		//Console::Writeline("massProduct = " + Convert::ToString(massProduct));
 		double coefficientLimiting = getCoefficients(moleculeString);
-		Console::WriteLine("coefficientLimiting = " + Convert::ToString(coefficientLimiting));
+		//Console::Writeline("coefficientLimiting = " + Convert::ToString(coefficientLimiting));
 		double coefficientProduct = getCoefficients(productString);
-		Console::WriteLine("coefficientProduct = " + Convert::ToString(coefficientProduct));
+		//Console::Writeline("coefficientProduct = " + Convert::ToString(coefficientProduct));
 		double yMols;
 		double yMass;
 
@@ -1328,14 +1329,14 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 			yMols = (atof(qnty.c_str()) * (coefficientProduct/coefficientLimiting));
 			yMass = (yMols / massProduct);
 
-			Console::WriteLine("yieldMols = " + Convert::ToString(yMols) + " | yieldMass = " + Convert::ToString(yMass));
+			//Console::Writeline("yieldMols = " + Convert::ToString(yMols) + " | yieldMass = " + Convert::ToString(yMass));
 		}
 		if ((unit == "grams") | (unit == "gram") | (unit == "g") | (unit == "Grams") | (unit == "Gram") | (unit == "G")) {
 
 			yMols = ((atof(qnty.c_str()) / massLimiting) * (coefficientProduct / coefficientLimiting));
 			yMass = (yMols / massProduct);
 
-			Console::WriteLine("yieldMols = " + Convert::ToString(yMols) + " | yieldMass = " + Convert::ToString(yMass));
+			//Console::Writeline("yieldMols = " + Convert::ToString(yMols) + " | yieldMass = " + Convert::ToString(yMass));
 		}
 		
 		Output->Text = "The yield of " + Input4->Text + " is:\r\n" + Convert::ToString(yMols) + " mols\r\n" + Convert::ToString(yMass) + " grams\r\nWith " + Convert::ToString(Input2->Text) + " " + Convert::ToString(Input3->Text) + " of " + Convert::ToString(Input1->Text);
@@ -1354,6 +1355,11 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 		else {
 			r = int::Parse(Input2->Text);
 			k = int::Parse(Input2->Text);
+			if (r > n) {
+				int temp = r;
+				r = n;
+				n = temp;
+			}
 		}
 
 		if ((Input3->Text == "Combination") | (Input3->Text == "combination") | (Input3->Text == "combine") | (Input3->Text == "Combine") | (Input3->Text == "C") | (Input3->Text == "c")) {
