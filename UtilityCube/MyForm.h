@@ -1450,14 +1450,14 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 		std::string name4 = context.marshal_as<std::string>(input4);
 
 		std::ofstream playerData;
-		playerData.open("pdata.txt");
+		playerData.open(".\\UtilityCube\\pdata.txt");
 		playerData << name1 << std::endl;
 		playerData << name3 << std::endl;
 		playerData << name2 << std::endl;
 		playerData << name4;
 		playerData.close();
 
-		Process::Start("TTT.exe");
+		Process::Start(".\\UtilityCube\\TTT.exe");
 	}
 }
 
