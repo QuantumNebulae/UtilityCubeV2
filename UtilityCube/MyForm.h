@@ -1293,8 +1293,6 @@ private: System::Void Mode6_CheckedChanged(System::Object^  sender, System::Even
 			 label4->Text = "Player 2's Marker";
 			 GuideBox->Text = "Insert the required information into the 4 input boxes on the left, and click submit. To play a bot, type in bot as player 2's name. To play a hardbot, type in hardbot as player 2's name.";
 }
-
-
 private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  e) {
 	if (mode == 1) { 
 		// Molar Mass
@@ -1484,8 +1482,6 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 		Process::Start(".\\UtilityCube\\TTT.exe");
 	}
 }
-
-
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
