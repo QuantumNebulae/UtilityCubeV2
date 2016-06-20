@@ -17,7 +17,7 @@ using namespace std;
 //Variables
 static vector<string> boardDefault = { "", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static vector<string> Board = boardDefault;
-string players[4] = {"Player1", "Player2", "Marker1", "Marker2"};
+string players[4] = { "Player1", "Player2", "Marker1", "Marker2" };
 string Player1 = players[0];
 string Player2 = players[1];
 string Marker1 = players[2];
@@ -49,7 +49,7 @@ void getInfo()
 {
 	string info;
 	ifstream playerData;
-	playerData.open(".\\UtilityCube\\pdata.txt");
+	playerData.open("pdata.txt");
 
 	for (int i = 0; i < 4; i++) {
 		getline(playerData, info);
