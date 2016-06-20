@@ -1458,28 +1458,28 @@ private: System::Void Submit_Click(System::Object^  sender, System::EventArgs^  
 			msclr::interop::marshal_context context;
 
 			input1 = Input1->Text;
-			std::string name1 = context.marshal_as<std::string>(input1);
+			name1 = context.marshal_as<std::string>(input1);
 
 			input2 = Input2->Text;
-			std::string name2 = context.marshal_as<std::string>(input2);
+			name2 = context.marshal_as<std::string>(input2);
 
 			input3 = Input3->Text;
-			std::string name3 = context.marshal_as<std::string>(input3);
+			name3 = context.marshal_as<std::string>(input3);
 
 			input4 = Input4->Text;
-			std::string name4 = context.marshal_as<std::string>(input4);
+			name4 = context.marshal_as<std::string>(input4);
 
 		}
 
 		std::ofstream playerData;
-		playerData.open(".\\UtilityCube\\pdata.txt");
+		playerData.open("pdata.txt");
 		playerData << name1 << std::endl;
 		playerData << name3 << std::endl;
 		playerData << name2 << std::endl;
 		playerData << name4;
 		playerData.close();
 
-		Process::Start(".\\UtilityCube\\TTT.exe");
+		Process::Start("TTT.exe");
 	}
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
